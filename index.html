@@ -13,6 +13,31 @@
                 <div class="title">Library</div>
             </div>
         </div>
+        <dialog id="book-dialog">
+        <form>
+            <h3>Add new book</h3>
+            <label for="title">
+                <input type="text" name="title" id="title" placeholder="Title" required>
+            </label>
+
+            <label for="author">
+                <input type="text" name="author" id="author" placeholder="Author" required>
+            </label>
+
+            <label for="pages">
+                <input type="number" name="pages" id="pages" placeholder="Pages" min="0" max="10000" required>
+            </label>
+
+            <label for="read">
+                Have you read the book?
+                <input type="checkbox" name="read" id="read" value="is-read">
+            </label>
+            <div>
+                <button id="confirm">Confirm</button>
+                <button id="cancel">Cancel</button>
+            </div>
+        </form>
+        </dialog>
         <div class="main">
             <div id="add-button"><p> + Add Book</p></div>
             <div class="book">

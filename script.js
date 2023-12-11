@@ -14,8 +14,37 @@ library[3] = dune
 library[4] = hamlet
 library[5] = harryPotter
 
+function Book(title, author, pages, read) {
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+
+    //shortened arrow funtion
+    this.info = () => `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}` 
+    
+    //normal function
+    // this.info = function() {
+    //     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}` 
+    // }
+}
+
 const addBook = document.getElementById('add-button')
 const readButtons = document.querySelectorAll('.isRead')
+const dialog = document.getElementById('book-dialog')
+const cancel = document.getElementById('cancel')
+const confirmBook = document.getElementById('confirm')
+
+addBook.addEventListener('click', () => {
+    dialog.showModal()
+})
+
+confirmBook.addEventListener('click', addBookToLibrary)
+
+cancel.addEventListener('click', () => {
+
+    dialog.close()
+})
 
 //chnages read button to either 'read' or 'not read' and its color
 readButtons.forEach( (button) => {  
@@ -32,23 +61,8 @@ readButtons.forEach( (button) => {
     })
 })
 
-addBook.addEventListener('click', addBookToLibrary)
 
 
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-
-    //shortened arrow funtion
-    this.info = () => `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}` 
-    
-    //normal function
-    // this.info = function() {
-    //     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}` 
-    // }
-}
 function addBookToLibrary() {
     for (i in library)
     console.log(library[i].info())

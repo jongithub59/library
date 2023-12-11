@@ -92,10 +92,77 @@ body {
     border: none;
  }
 
+ button:hover {
+    filter: brightness(90%);
+    transition: .15s;
+ }
+
  .read {
     background-color: rgb(91, 224, 91);
  }
 
  .not-read {
-    background-color: rgb(224, 33, 33);
+    background-color: rgb(235, 48, 48);
  }
+
+ dialog {
+    margin: auto; 
+    border: none;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+    height: 500px;
+    width: 350px;
+    transition: .5s;
+ }
+
+form {
+    margin: 15px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+form h3 {
+    font-size: 25px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    margin: 5px;
+    height: 50px;
+    width: 120px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+input {
+    margin: 0 10px;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid var(--grey);
+    height: 40px;
+    font-size: 20px;
+}
+
+#pages {
+    width: 250px;
+}
+
+#read {
+    margin-bottom: 3px;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+}
+

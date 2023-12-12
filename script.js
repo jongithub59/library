@@ -89,7 +89,6 @@ function displayLibrary(newBook) { //creates all the book display elemnents and 
     pagesElement.innerText = `${pages} pages`
 
     let readElement = document.createElement('button')
-    const read = newBook.read
     if (newBook.read == false) {
     readElement.classList.add('not-read')
     readElement.innerText = 'Not Read'

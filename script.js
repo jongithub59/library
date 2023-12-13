@@ -8,14 +8,24 @@ const dune = new Book('Dune', 'Frank Herbert', 896, 'read')
 const odyssey = new Book('Odyssey', 'Homer', '+'+380, 'not read')
 const hamlet = new Book('Hamlet', 'William Shakespeare', 330, 'read')
 
+const randomBook = Math.floor(Math.random() * 6);
 
-library[0] = theHobbit
-library[1] = illiad
-library[2] = odyssey
-library[3] = dune
-library[4] = hamlet
-library[5] = harryPotter
+switch (randomBook) {
+    case 0: library[0] = theHobbit
+        break
+    case 1: library[0] = illiad
+        break
+    case 2: library[0] = odyssey
+        break
+    case 3: library[0] = dune
+        break
+    case 4: library[0] = hamlet
+        break
+    case 5: library[0] = harryPotter
+        break     
+}
 
+console.log(library)
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -74,27 +84,28 @@ function addBookToLibrary() {
     pagesInput.value = ''
     readInput.checked = false
     error.classList.add('error')
-    displayLibrary(newBook)
+    displayLibrary(library)
 }
 
-function displayLibrary(newBook) { //creates all the book display elemnents and uses previously created object for the content
+function displayLibrary(library) { //creates all the book display elemnents and uses previously created object for the content
+    for (i in library) {
     let book = document.createElement('div')
     book.classList.add('book')
 
     let titleElement = document.createElement('p')
-    const title = newBook.title
+    const title = library[i].title
     titleElement.innerText = `"${title}"`
 
     let authorElement = document.createElement('p')
-    const author = newBook.author
+    const author = library[i].author
     authorElement.innerText = author 
 
     let pagesElement = document.createElement('p')
-    const pages = newBook.pages
+    const pages = library[i].pages
     pagesElement.innerText = `${pages} pages`
 
     let readElement = document.createElement('button')
-    if (newBook.read == false) {
+    if (library[i].read == false) {
     readElement.classList.add('not-read')
     readElement.innerText = 'Not Read'
     } else {
@@ -124,6 +135,8 @@ function displayLibrary(newBook) { //creates all the book display elemnents and 
     book.appendChild(pagesElement)
     book.appendChild(readElement)
     book.appendChild(deleteButton)
+    }   
+    library.shift()
     dialog.close()
 }
 
@@ -144,19 +157,8 @@ cancel.addEventListener('click', (event) => {
 })
 
 //chnages read button to either 'read' or 'not read' and its color for example book
-readButtons.forEach( (button) => {  
-    button.addEventListener('click', () => {
-        if (button.classList.contains('read')) {
-            button.classList.remove('read')
-            button.classList.add('not-read')
-            button.textContent = 'Not Read'
-        } else { 
-            button.classList.remove('not-read')
-            button.classList.add('read')
-            button.textContent = 'Read'
-        }
-    })
-})
+
+displayLibrary(library)
 
 
 

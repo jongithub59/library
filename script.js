@@ -42,6 +42,7 @@ const titleInput = document.getElementById('title')
 const authorInput = document.getElementById('author')
 const pagesInput = document.getElementById('pages')
 const readInput = document.getElementById('read')
+const error = document.querySelector('.error');
 
 addBook.addEventListener('click', (event) => {
     event.preventDefault()
@@ -63,7 +64,7 @@ function addBookToLibrary() {
     console.log(isRead)
 
     if (titleInput.value == '' || authorInput.value == '' || pagesInput.value == '') {
-    return
+    return error.classList.remove('error')
     }
     let newBook = new Book(titleValue, authorValue, pagesValue, isRead) //create new book object and store in the library
     library.push(newBook)
@@ -72,7 +73,7 @@ function addBookToLibrary() {
     authorInput.value = ''
     pagesInput.value = ''
     readInput.checked = false
-    
+    error.classList.add('error')
     displayLibrary(newBook)
 }
 
@@ -138,6 +139,7 @@ cancel.addEventListener('click', (event) => {
     authorInput.value = ''
     pagesInput.value = ''
     readInput.checked = false
+    error.classList.add('error')
     dialog.close()
 })
 

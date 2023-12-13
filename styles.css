@@ -39,8 +39,9 @@ body {
 
 .main {
     display: grid;
-    grid-template-rows: 1fr repeat(3, 2fr);
-    grid-template-columns: repeat(4, 1fr);
+    /* overflow: auto; */
+    grid-template-rows: repeat(2, 350px);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 10px;
     margin: auto;
     height: 100%;
@@ -48,11 +49,10 @@ body {
 }
 
 #add-button {
-    grid-area: 1 / 1 / 2 / 5;
     display: flex;
     margin: auto;
     width: 200px;
-    height: 60%;
+    height: 10vh;
     justify-self: center;
     align-items: center;
     color: azure;
@@ -75,6 +75,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
     margin: 10px;
+    min-height: 350px;
     font-size: 20px;
     font-weight: 600;
     box-shadow: 0 1px 5px;
@@ -165,4 +166,3 @@ input {
     height: 20px;
     width: 20px;
 }
-

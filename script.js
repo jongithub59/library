@@ -68,6 +68,10 @@ function addBookToLibrary() {
     let newBook = new Book(titleValue, authorValue, pagesValue, isRead) //create new book object and store in the library
     library.push(newBook)
     console.log(library)
+    titleInput.value = ''
+    authorInput.value = ''
+    pagesInput.value = ''
+    readInput.checked = false
     
     displayLibrary(newBook)
 }
@@ -130,6 +134,10 @@ confirmBook.addEventListener('click', (event) => {
 
 cancel.addEventListener('click', (event) => {
     event.preventDefault()
+    titleInput.value = ''
+    authorInput.value = ''
+    pagesInput.value = ''
+    readInput.checked = false
     dialog.close()
 })
 

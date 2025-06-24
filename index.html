@@ -32,7 +32,15 @@
                 Have you read the book?
                 <input type="checkbox" name="read" id="read" value="is-read">
             </label>
-            <p id="error" class="error">Book title, author name, and page number cannot be empty.</p>
+            <div id="error">
+                <p id="error-all" class="error-visible">* Book title, author name, and page number cannot be empty.</p>
+                <p id="error-title-author" class="error-visible">* Book title and author name cannot be empty.</p>
+                <p id="error-title-pages" class="error-visible">* Book title and page number cannot be empty.</p>
+                <p id="error-author-pages" class="error-visible">* Author name and page number cannot be empty.</p>
+                <p id="error-title" class="error-visible">* Book title cannot be empty.</p>
+                <p id="error-author" class="error-visible">* Author name cannot be empty.</p>
+                <p id="error-pages" class="error-visible">* Page number cannot be empty.</p>
+            </div>
             <div>
                 <button id="confirm">Confirm</button>
                 <button id="cancel">Cancel</button>
@@ -48,7 +56,6 @@
         </div>
 
     </div>
-
 
     
     <script src="script.js"></script>

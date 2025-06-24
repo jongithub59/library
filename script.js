@@ -1,31 +1,20 @@
-const library = [] //where books are stored and pulled form
+const library = [] //where books are stored and pulled from
 
 //example books
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'Not Read')
-const harryPotter = new Book('Harry Potter and the Sorcerer\'s Stone', 'J.k Rowling', 223, 'not read')
-const illiad = new Book('Illiad', 'Homer', '+'+700, 'not read') 
-const dune = new Book('Dune', 'Frank Herbert', 896, 'read')
-const odyssey = new Book('Odyssey', 'Homer', '+'+380, 'not read')
-const hamlet = new Book('Hamlet', 'William Shakespeare', 330, 'read')
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
+const harryPotter = new Book('Harry Potter and the Sorcerer\'s Stone', 'J.K. Rowling', 223, false)
+const illiad = new Book('Illiad', 'Homer', '+' + 700, false) 
+const dune = new Book('Dune', 'Frank Herbert', 896, false)
+const odyssey = new Book('Odyssey', 'Homer', '+' + 380, false)
+const hamlet = new Book('Hamlet', 'William Shakespeare', 330, false)
 
-const randomBook = Math.floor(Math.random() * 6);
+library[0] = harryPotter;
+library[1] = theHobbit;
+library[2] = illiad;
+library[3] = dune;
+library[4] = hamlet;
+library[5] = odyssey;
 
-switch (randomBook) {
-    case 0: library[0] = theHobbit
-        break
-    case 1: library[0] = illiad
-        break
-    case 2: library[0] = odyssey
-        break
-    case 3: library[0] = dune
-        break
-    case 4: library[0] = hamlet
-        break
-    case 5: library[0] = harryPotter
-        break     
-}
-
-console.log(library)
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -52,7 +41,14 @@ const titleInput = document.getElementById('title')
 const authorInput = document.getElementById('author')
 const pagesInput = document.getElementById('pages')
 const readInput = document.getElementById('read')
-const error = document.querySelector('.error');
+const errorMessages = error.querySelectorAll(".error-visible");
+const errorAll = document.querySelector('#error-all');
+const errorTitleAuthor = document.querySelector("#error-title-author");
+const errorTitlePages = document.querySelector("#error-title-pages");
+const errorAuthorPages = document.querySelector("#error-author-pages");
+const errorTitle = document.querySelector("#error-title");
+const errorAuthor = document.querySelector("#error-author");
+const errorPages = document.querySelector("#error-pages");
 
 addBook.addEventListener('click', (event) => {
     event.preventDefault()
@@ -60,22 +56,43 @@ addBook.addEventListener('click', (event) => {
 
 })
 
+confirmBook.addEventListener('click', (event) => {
+    event.preventDefault()
+    addBookToLibrary()
+})
+
+cancel.addEventListener('click', (event) => {
+    event.preventDefault()
+    titleInput.value = ''
+    authorInput.value = ''
+    pagesInput.value = ''
+    readInput.checked = false
+    errorMessages.forEach((errorMessage) => {
+        errorMessage.classList.add('error-visible')
+    });
+    dialog.close()
+})
+
 function addBookToLibrary() {
     let titleValue = titleInput.value //stores value form dialog input into variable for use
-    console.log(titleValue)
 
     let authorValue = authorInput.value
-    console.log(authorValue)
 
     let pagesValue = pagesInput.value
-    console.log(pagesValue)
 
     let isRead = readInput.checked
-    console.log(isRead)
 
-    if (titleInput.value == '' || authorInput.value == '' || pagesInput.value == '') {
-    return error.classList.remove('error')
-    }
+    errorMessages.forEach((errorMessage) => {
+        errorMessage.classList.add("error-visible");
+    });
+
+    if (titleValue === '' && authorValue === '' && pagesValue === '') return errorAll.classList.remove('error-visible')
+    if (titleValue === "" && authorValue === "") return errorTitleAuthor.classList.remove("error-visible");
+    if (titleValue === "" && pagesValue === "") return errorTitlePages.classList.remove("error-visible");
+    if (authorValue === "" && pagesValue === "") return errorAuthorPages.classList.remove("error-visible");
+    if (titleValue === "") return errorTitle.classList.remove("error-visible");
+    if (authorValue === "") return errorAuthor.classList.remove("error-visible");
+    if (pagesValue === "") return errorPages.classList.remove("error-visible");
     let newBook = new Book(titleValue, authorValue, pagesValue, isRead) //create new book object and store in the library
     library.push(newBook)
     console.log(library)
@@ -83,7 +100,9 @@ function addBookToLibrary() {
     authorInput.value = ''
     pagesInput.value = ''
     readInput.checked = false
-    error.classList.add('error')
+    errorMessages.forEach((errorMessage) => {
+        errorMessage.classList.add("error-visible");
+    });
     displayLibrary(library)
 }
 
@@ -105,7 +124,7 @@ function displayLibrary(library) { //creates all the book display elemnents and 
     pagesElement.innerText = `${pages} pages`
 
     let readElement = document.createElement('button')
-    if (library[i].read == false) {
+    if (library[i].read === false) {
     readElement.classList.add('not-read')
     readElement.innerText = 'Not Read'
     } else {
@@ -136,40 +155,12 @@ function displayLibrary(library) { //creates all the book display elemnents and 
     book.appendChild(readElement)
     book.appendChild(deleteButton)
     }   
-    library.shift()
+    library.shift() //removes the first array element so that it's only appended once ant again when the function is repeated
     dialog.close()
 }
 
 
-confirmBook.addEventListener('click', (event) => {
-    event.preventDefault()
-    addBookToLibrary()
-})
-
-cancel.addEventListener('click', (event) => {
-    event.preventDefault()
-    titleInput.value = ''
-    authorInput.value = ''
-    pagesInput.value = ''
-    readInput.checked = false
-    error.classList.add('error')
-    dialog.close()
-})
 
 //chnages read button to either 'read' or 'not read' and its color for example book
 
 displayLibrary(library)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
